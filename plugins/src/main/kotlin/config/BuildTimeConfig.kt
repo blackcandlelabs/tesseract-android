@@ -11,14 +11,14 @@ package config
 object BuildTimeConfig {
     const val APPLICATION_ID = "com.blackcandle.tesseract"
     const val APPLICATION_NAME = "Tesseract"
-    val METADATA_HOST_REVERSED: String? = "com.blackcandle.tesseract"
-    val OAUTH_CLIENT_URL_PATH: String? = "apps/android"
-    val URL_WEBSITE: String? = null
-    val URL_LOGO: String? = null
-    val URL_COPYRIGHT: String? = null
-    val URL_ACCEPTABLE_USE: String? = null
-    val URL_PRIVACY: String? = null
-    val URL_POLICY: String? = null
+    val METADATA_HOST_REVERSED: String? = "com.blackcandletech.tesseract"
+    val OAUTH_CLIENT_URL_PATH: String? = null
+    val URL_WEBSITE: String? = "https://tesseract.blackcandletech.com"
+    val URL_LOGO: String? = "https://tesseract.blackcandletech.com/logo.png"
+    val URL_COPYRIGHT: String? = "https://tesseract.blackcandletech.com"
+    val URL_ACCEPTABLE_USE: String? = "https://tesseract.blackcandletech.com/terms"
+    val URL_PRIVACY: String? = "https://tesseract.blackcandletech.com/privacy"
+    val URL_POLICY: String? = "https://tesseract.blackcandletech.com/privacy"
     val SERVICES_MAPTILER_BASE_URL: String? = null
     val SERVICES_MAPTILER_APIKEY: String? = null
     val SERVICES_MAPTILER_LIGHT_MAPID: String? = null

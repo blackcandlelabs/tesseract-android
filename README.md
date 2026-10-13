@@ -15,6 +15,7 @@ Black Candle's Android client for Tesseract (internal Matrix chat), a rebranded 
 2. libraries/matrix/api AccountProvider.kt + login usages — default account provider is chat.internal.blackcandletech.com (symbol renamed matrixOrgAccountProvider -> tesseractAccountProvider; tests updated). Users can still choose another server manually.
 3. appicon/element — launcher icons replaced with the original Tesseract candle mark (amber #E8A33D on #08090B) at all densities; adaptive-icon background #08090B.
 4. libraries/pushproviders/firebase FirebaseConfig.kt — PUSHER_HTTP_URL re-pointed from matrix.org’s Sygnal to https://chat.internal.blackcandletech.com/_matrix/push/v1/notify (our Sygnal). FCM push requires the gplay flavor with google-services.json (Firebase project bct-tesseract) injected at app/ — a build input, not committed.
+5. plugins/src/main/kotlin/config/BuildTimeConfig.kt (OAuth identity) — METADATA_HOST_REVERSED com.blackcandletech.tesseract (OAuth redirect scheme; MAS registration policy requires the scheme to be the reverse-DNS of the client_uri host) and URL_WEBSITE/URL_LOGO/URL_ACCEPTABLE_USE/URL_PRIVACY/URL_POLICY pointed at https://tesseract.blackcandletech.com (was: element.io defaults, which made MAS reject dynamic client registration with invalid_redirect_uri). OAUTH_CLIENT_URL_PATH null.
 
 ## Build (release APK, sideload)
 
