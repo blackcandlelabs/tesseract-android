@@ -68,6 +68,10 @@ sealed interface AccountProvider {
     }
 }
 
-val matrixOrgAccountProvider = AccountProvider.Generic(
-    serverName = "matrix.org",
+/**
+ * Tesseract fork: the default account provider is the Black Candle homeserver
+ * (was matrix.org upstream). Users can still pick another server manually.
+ */
+val tesseractAccountProvider = AccountProvider.Generic(
+    serverName = "chat.internal.blackcandletech.com",
 )

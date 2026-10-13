@@ -12,7 +12,7 @@ import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import io.element.android.features.enterprise.test.FakeEnterpriseService
 import io.element.android.libraries.matrix.api.accountprovider.AccountProvider
-import io.element.android.libraries.matrix.api.accountprovider.matrixOrgAccountProvider
+import io.element.android.libraries.matrix.api.accountprovider.tesseractAccountProvider
 import io.element.android.libraries.matrix.test.accountprovider.anAccountProviderManaged
 import io.element.android.libraries.preferences.test.InMemoryAppPreferencesStore
 import io.element.android.tests.testutils.WarmUpRule
@@ -28,7 +28,7 @@ class AccountProviderDataSourceTest {
     fun `present - initial state - matrix org is the default when nothing is configured`() = runTest {
         val sut = anAccountProviderDataSource()
         sut.flow.test {
-            assertThat(awaitItem()).isEqualTo(matrixOrgAccountProvider)
+            assertThat(awaitItem()).isEqualTo(tesseractAccountProvider)
         }
     }
 
@@ -50,11 +50,11 @@ class AccountProviderDataSourceTest {
     fun `present - user change and reset`() = runTest {
         val sut = anAccountProviderDataSource()
         sut.flow.test {
-            assertThat(awaitItem()).isEqualTo(matrixOrgAccountProvider)
+            assertThat(awaitItem()).isEqualTo(tesseractAccountProvider)
             sut.setAccountProvider(AccountProvider.Generic("https://example.com"))
             assertThat(awaitItem()).isEqualTo(AccountProvider.Generic("https://example.com"))
             sut.reset()
-            assertThat(awaitItem()).isEqualTo(matrixOrgAccountProvider)
+            assertThat(awaitItem()).isEqualTo(tesseractAccountProvider)
         }
     }
 
@@ -62,13 +62,13 @@ class AccountProviderDataSourceTest {
     fun `present - set url and reset`() = runTest {
         val sut = anAccountProviderDataSource()
         sut.flow.test {
-            assertThat(awaitItem()).isEqualTo(matrixOrgAccountProvider)
+            assertThat(awaitItem()).isEqualTo(tesseractAccountProvider)
             sut.setUrl(url = "https://example.com")
             assertThat(awaitItem()).isEqualTo(
                 AccountProvider.Generic("https://example.com")
             )
             sut.reset()
-            assertThat(awaitItem()).isEqualTo(matrixOrgAccountProvider)
+            assertThat(awaitItem()).isEqualTo(tesseractAccountProvider)
         }
     }
 

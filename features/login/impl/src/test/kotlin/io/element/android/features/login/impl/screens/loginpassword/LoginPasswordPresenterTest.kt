@@ -13,7 +13,7 @@ import io.element.android.features.login.impl.accountprovider.AccountProviderDat
 import io.element.android.features.login.impl.accountprovider.SaveAccountProviderToHistory
 import io.element.android.features.login.impl.accountprovider.anAccountProviderDataSource
 import io.element.android.libraries.architecture.AsyncData
-import io.element.android.libraries.matrix.api.accountprovider.matrixOrgAccountProvider
+import io.element.android.libraries.matrix.api.accountprovider.tesseractAccountProvider
 import io.element.android.libraries.matrix.api.core.SessionId
 import io.element.android.libraries.matrix.test.AN_EXCEPTION
 import io.element.android.libraries.matrix.test.A_PASSWORD
@@ -39,7 +39,7 @@ class LoginPasswordPresenterTest {
     fun `present - initial state`() = runTest {
         createLoginPasswordPresenter().test {
             val initialState = awaitItem()
-            assertThat(initialState.accountProvider).isEqualTo(matrixOrgAccountProvider)
+            assertThat(initialState.accountProvider).isEqualTo(tesseractAccountProvider)
             assertThat(initialState.formState).isEqualTo(LoginFormState.Default)
             assertThat(initialState.loginAction).isEqualTo(AsyncData.Uninitialized)
             assertThat(initialState.submitEnabled).isFalse()
@@ -127,7 +127,7 @@ class LoginPasswordPresenterTest {
             val loggedInState = awaitItem()
             assertThat(loggedInState.loginAction).isEqualTo(AsyncData.Success(A_SESSION_ID))
             assertThat(appPreferencesStore.getHomeserverHistoryFlow().first())
-                .containsExactly(matrixOrgAccountProvider.serverName)
+                .containsExactly(tesseractAccountProvider.serverName)
         }
     }
 

@@ -29,7 +29,7 @@ import io.element.android.features.login.impl.login.LoginModeState
 import io.element.android.libraries.architecture.Presenter
 import io.element.android.libraries.core.uri.ensureProtocol
 import io.element.android.libraries.matrix.api.accountprovider.AccountProvider
-import io.element.android.libraries.matrix.api.accountprovider.matrixOrgAccountProvider
+import io.element.android.libraries.matrix.api.accountprovider.tesseractAccountProvider
 import io.element.android.libraries.matrix.api.core.MatrixPatterns
 import io.element.android.libraries.preferences.api.store.AppPreferencesStore
 import kotlinx.coroutines.flow.map
@@ -67,7 +67,7 @@ class ConfirmAccountProviderPresenter(
         // enterprise/MDM-configured allow-list, then matrix.org (always available, even before any sign-in).
         // Everything is rendered without the https:// scheme (added back at connection time).
         val autocompleteCandidates = remember(homeserverHistory) {
-            (homeserverHistory + enterpriseService.accountProviderAllowList() + matrixOrgAccountProvider)
+            (homeserverHistory + enterpriseService.accountProviderAllowList() + tesseractAccountProvider)
                 .map { it.friendlyServerName() }
                 .distinct()
         }

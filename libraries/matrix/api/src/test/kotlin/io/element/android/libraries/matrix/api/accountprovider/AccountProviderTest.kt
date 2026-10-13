@@ -37,8 +37,8 @@ class AccountProviderTest {
     }
 
     @Test
-    fun `matrixOrgAccountProvider is known by its server name`() {
-        assertThat(matrixOrgAccountProvider.serverNameOrBaseUrl()).isEqualTo("matrix.org")
+    fun `tesseractAccountProvider is known by its server name`() {
+        assertThat(tesseractAccountProvider.serverNameOrBaseUrl()).isEqualTo("chat.internal.blackcandletech.com")
     }
 
     @Test
