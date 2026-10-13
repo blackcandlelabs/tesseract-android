@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "461881828968",
+    "project_id": "bct-tesseract",
+    "storage_bucket": "bct-tesseract.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461881828968:android:9e853913b865666efafddd",
+        "android_client_info": {
+          "package_name": "com.blackcandle.tesseract"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0t6HcHKuNzS-fJzh8LxNbWhfX4sORMZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

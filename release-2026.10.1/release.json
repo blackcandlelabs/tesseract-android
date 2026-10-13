@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "builds": [
+    {
+      "flavor": "gplay",
+      "version_code": 202609052,
+      "version_name": "26.09.4",
+      "files": [
+        {
+          "abi": "arm64-v8a",
+          "name": "Tesseract-26.09.4-gplay-arm64-v8a.apk",
+          "sha256": "414cbab7a358e10092d6ae28d3fcbe1f42c3d1495b3a76f7215d3c06447566de",
+          "version_code": 202609052
+        },
+        {
+          "abi": "armeabi-v7a",
+          "name": "Tesseract-26.09.4-gplay-armeabi-v7a.apk",
+          "sha256": "afb1e11efef6e3ac12d5d6ae03eb3548dea98c52750bb860ae140587851e18fa",
+          "version_code": 202609051
+        },
+        {
+          "abi": "x86",
+          "name": "Tesseract-26.09.4-gplay-x86.apk",
+          "sha256": "73ad7ba3af349ff556ce55c4753d091158b74bb2197d14b9c7d606fc54694814",
+          "version_code": 202609053
+        },
+        {
+          "abi": "x86_64",
+          "name": "Tesseract-26.09.4-gplay-x86_64.apk",
+          "sha256": "14e67821e293b07722c072b167a49cbe579b0a00dfd02d577d80365f182c65ec",
+          "version_code": 202609054
+        },
+        {
+          "abi": "universal",
+          "name": "Tesseract-26.09.4-gplay-universal.apk",
+          "sha256": "398d698b2bd406944daaa04910402154fb1453dcfd6743571461a347149718c9",
+          "version_code": 202609050
+        }
+      ]
+    }
+  ]
+}
