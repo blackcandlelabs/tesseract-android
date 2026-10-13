@@ -80,6 +80,7 @@ private data class ReleaseFile(
     val abi: String,
     val name: String,
     val sha256: String,
+    @SerialName("version_code") val versionCode: Long,
 )
 
 private data class UpdateCandidate(
@@ -118,11 +119,12 @@ class AppUpdater(private val activity: Activity) {
             val indexText = httpGet(indexAsset.browserDownloadUrl) ?: continue
             val index = runCatching { json.decodeFromString<ReleaseIndex>(indexText) }.getOrNull() ?: continue
             if (index.schema != 1) continue
-            val build = index.builds.firstOrNull { it.flavor == flavor && it.versionCode > installed } ?: continue
+            val build = index.builds.firstOrNull { it.flavor == flavor } ?: continue
             val abi = Build.SUPPORTED_ABIS.firstOrNull() ?: "universal"
             val file = build.files.firstOrNull { it.abi == abi }
                 ?: build.files.firstOrNull { it.abi == "universal" }
                 ?: continue
+            if (file.versionCode <= installed) continue
             val asset = release.assets.firstOrNull { it.name == file.name } ?: continue
             return@withContext UpdateCandidate(release.tagName, build, file, asset)
         }
