@@ -14,12 +14,15 @@ Black Candle's Android client for Tesseract (internal Matrix chat), a rebranded 
 1. plugins/src/main/kotlin/config/BuildTimeConfig.kt — APPLICATION_ID com.blackcandle.tesseract (was io.element.android.x), APPLICATION_NAME "Tesseract", METADATA_HOST_REVERSED com.blackcandle.tesseract (OAuth redirect scheme for MAS login), PUSH_CONFIG_INCLUDE_FIREBASE=false (push arrives with the Sygnal/FCM milestone; UnifiedPush stays compiled in).
 2. libraries/matrix/api AccountProvider.kt + login usages — default account provider is chat.internal.blackcandletech.com (symbol renamed matrixOrgAccountProvider -> tesseractAccountProvider; tests updated). Users can still choose another server manually.
 3. appicon/element — launcher icons replaced with the original Tesseract candle mark (amber #E8A33D on #08090B) at all densities; adaptive-icon background #08090B.
+4. libraries/pushproviders/firebase FirebaseConfig.kt — PUSHER_HTTP_URL re-pointed from matrix.org’s Sygnal to https://chat.internal.blackcandletech.com/_matrix/push/v1/notify (our Sygnal). FCM push requires the gplay flavor with google-services.json (Firebase project bct-tesseract) injected at app/ — a build input, not committed.
 
 ## Build (release APK, sideload)
 
 Toolchain: JDK 21, Android SDK platform 37 + build-tools 37.0.0 (see the tesseract-android-build Docker image used by Black Candle).
 
     ./gradlew :app:assembleFdroidRelease
+
+    ./gradlew :app:assembleGplayRelease   # push-capable (Firebase) build; needs app/google-services.json
 
 produces an unsigned universal APK under app/build/outputs/apk/fdroid/release/. Sign with the Tesseract release keystore (held offline by the founders; generated 2026-10-12):
 
