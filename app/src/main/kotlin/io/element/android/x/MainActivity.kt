@@ -42,6 +42,7 @@ import io.element.android.libraries.designsystem.utils.snackbar.LocalSnackbarDis
 import io.element.android.services.analytics.compose.LocalAnalyticsService
 import io.element.android.x.di.AppBindings
 import io.element.android.x.intent.SafeUriHandler
+import io.element.android.x.updater.AppUpdater
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -67,6 +68,10 @@ class MainActivity : NodeActivity() {
             lifecycleScope.launch {
                 it.onAppStartup(activity)
             }
+        }
+        // Tesseract fork: self-update check against GitHub Releases.
+        lifecycleScope.launch {
+            AppUpdater(activity).checkForUpdate()
         }
     }
 
