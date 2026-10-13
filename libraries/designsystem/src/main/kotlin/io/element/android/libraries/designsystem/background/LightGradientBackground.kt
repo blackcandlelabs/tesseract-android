@@ -27,7 +27,7 @@ import io.element.android.libraries.designsystem.preview.PreviewsDayNight
 fun LightGradientBackground(
     modifier: Modifier = Modifier,
     backgroundColor: Color = ElementTheme.colors.bgCanvasDefault,
-    firstColor: Color = Color(0x1E0DBD8B),
+    firstColor: Color = Color(0x1EE8A33D),
     secondColor: Color = Color(0x001273EB),
     ratio: Float = 642 / 775f,
 ) {

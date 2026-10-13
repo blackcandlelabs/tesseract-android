@@ -249,10 +249,10 @@ androidComponents {
             val abiCode = abiVersionCodes[name] ?: 0
             // Assigns the new version code to output.versionCode, which changes the version code
             // for only the output APK, not for the variant itself.
-            // Tesseract fork: +1 build offset (applied before the ABI digit) so every fork
+            // Tesseract fork: +2 build offset (applied before the ABI digit) so every fork
             // release exceeds the previous fork build on the same upstream base.
             // Bump this offset for each fork release.
-            output.versionCode.set(((output.versionCode.orNull ?: 0) + 1) * 10 + abiCode)
+            output.versionCode.set(((output.versionCode.orNull ?: 0) + 2) * 10 + abiCode)
         }
     }
 
