@@ -99,10 +99,13 @@ class AppUpdater(private val activity: Activity) {
         val prefs = activity.getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE)
         val now = System.currentTimeMillis()
         if (now - prefs.getLong(KEY_LAST_CHECK, 0L) < CHECK_INTERVAL_MS) return
-        prefs.edit().putLong(KEY_LAST_CHECK, now).apply()
-        val candidate = runCatching { findCandidate() }
+        val result = runCatching { findCandidate() }
             .onFailure { Timber.tag(TAG).w(it, "Update check failed") }
-            .getOrNull() ?: return
+        // Stamp only after a completed scan: a failed check must not
+        // suppress the next cold start for the whole interval.
+        if (result.isFailure) return
+        prefs.edit().putLong(KEY_LAST_CHECK, System.currentTimeMillis()).apply()
+        val candidate = result.getOrNull() ?: return
         withContext(Dispatchers.Main) {
             if (!activity.isFinishing && !activity.isDestroyed) prompt(candidate)
         }
@@ -269,7 +272,7 @@ class AppUpdater(private val activity: Activity) {
         private const val TAG = "AppUpdater"
         private const val PREFS_NAME = "tesseract_updater"
         private const val KEY_LAST_CHECK = "last_check_ms"
-        private const val CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000L
+        private const val CHECK_INTERVAL_MS = 60 * 60 * 1000L
         private const val USER_AGENT = "Tesseract-Updater"
         private const val RELEASES_URL = "https://api.github.com/repos/blackcandlelabs/tesseract-android/releases?per_page=10"
         private const val PINNED_CERT_SHA256 = "512f0b7d9da8b114fa27c42585ad96d81322afdd5efe1db898816e08d2332082"

@@ -252,7 +252,7 @@ androidComponents {
             // Tesseract fork: +4 build offset (applied before the ABI digit) so every fork
             // release exceeds the previous fork build on the same upstream base.
             // Bump this offset for each fork release.
-            output.versionCode.set(((output.versionCode.orNull ?: 0) + 4) * 10 + abiCode)
+            output.versionCode.set(((output.versionCode.orNull ?: 0) + 5) * 10 + abiCode)
         }
     }
 
@@ -288,7 +288,7 @@ dependencies {
         "gplayImplementation"(projects.libraries.pushproviders.firebase)
     }
     if (ModulesConfig.pushProvidersConfig.includeUnifiedPush) {
-        implementation(projects.libraries.pushproviders.unifiedpush)
+    "fdroidImplementation"(projects.libraries.pushproviders.unifiedpush)
     }
 
     // Google Play Services fused location backend. Discovered at runtime via ServiceLoader by the
