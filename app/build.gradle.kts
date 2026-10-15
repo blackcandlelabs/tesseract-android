@@ -285,7 +285,8 @@ dependencies {
     implementation(projects.services.analytics.compose)
 
     if (ModulesConfig.pushProvidersConfig.includeFirebase) {
-        "gplayImplementation"(projects.libraries.pushproviders.firebase)
+        // Tesseract fork: Firebase retired (2026-10-14) - gplay uses UnifiedPush, same as fdroid.
+        "gplayImplementation"(projects.libraries.pushproviders.unifiedpush)
     }
     if (ModulesConfig.pushProvidersConfig.includeUnifiedPush) {
     "fdroidImplementation"(projects.libraries.pushproviders.unifiedpush)
@@ -293,7 +294,7 @@ dependencies {
 
     // Google Play Services fused location backend. Discovered at runtime via ServiceLoader by the
     // location feature.
-    "gplayImplementation"(libs.maplibre.compose.location.runtime.gms)
+    // Tesseract fork: MapLibre GMS location runtime dropped with Firebase retirement (fdroid parity).
 
     implementation(libs.appyx.core)
     implementation(libs.androidx.splash)

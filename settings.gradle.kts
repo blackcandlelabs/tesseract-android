@@ -36,7 +36,6 @@ dependencyResolutionManagement {
                 includeGroupByRegex("android\\..*")
                 includeGroupByRegex("androidx\\..*")
                 includeGroupByRegex("com\\.android\\.tools.*")
-                includeGroupByRegex("com\\.google\\.firebase.*")
                 includeGroupByRegex("com\\.google\\.android.*")
             }
         }
