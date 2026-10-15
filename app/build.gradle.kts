@@ -252,7 +252,7 @@ androidComponents {
             // Tesseract fork: +4 build offset (applied before the ABI digit) so every fork
             // release exceeds the previous fork build on the same upstream base.
             // Bump this offset for each fork release.
-            output.versionCode.set(((output.versionCode.orNull ?: 0) + 7) * 10 + abiCode)
+            output.versionCode.set(((output.versionCode.orNull ?: 0) + 8) * 10 + abiCode)
         }
     }
 
