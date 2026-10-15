@@ -82,8 +82,9 @@ fun ElementThemeApp(
         ElementTheme(
             theme = theme,
             content = content,
-            compoundLight = compoundLight,
-            compoundDark = compoundDark,
+            // Tesseract fork: Black Candle redesign foundation (see TesseractTheme.kt).
+            compoundLight = compoundLight.tesseractLight(),
+            compoundDark = compoundDark.tesseractDark(),
         )
     }
 }
