@@ -1,6 +1,6 @@
 # Tesseract Android Client
 
-Black Candle's Android client for Tesseract (internal Matrix chat), a rebranded fork of Element X Android. Defaults to the Black Candle homeserver (chat.internal.blackcandletech.com) with MAS/OIDC sign-in via authd. Distributed via this repo’s GitHub Releases with a built-in self-updater; push via FCM through Black Candle’s own Sygnal gateway.
+Black Candle's Android client for Tesseract (internal Matrix chat), a rebranded fork of Element X Android. Defaults to the Black Candle homeserver (chat.internal.blackcandletech.com) with MAS/OIDC sign-in via authd. Distributed via this repo’s GitHub Releases with a built-in self-updater; push via UnifiedPush (ntfy) only — Firebase/FCM and the Sygnal gateway were retired 2026-10-14, and federation is closed server-side.
 
 ## Upstream pin
 
@@ -24,13 +24,17 @@ Black Candle's Android client for Tesseract (internal Matrix chat), a rebranded 
 
 9. Push actually reaches our Firebase project (2026-10-13) — three fixes. (a) The firebase module's resource files (src/main + src/release + src/debug res/values/firebase.xml) now carry the Black Candle Firebase project (bct-tesseract) instead of upstream's vector-alpha: the google-services Gradle plugin is commented out in app/build.gradle.kts, so these resources ARE the Firebase config and the tree's google-services.json is never consumed; 2026.10.2 initialized Firebase against Element's project and FCM rejected delivery with SENDER_ID_MISMATCH (proven in Sygnal's log). (b) BuildTimeConfig.PUSHER_APP_ID_RELEASE/DEBUG = com.blackcandle.tesseract (was null, i.e. the upstream default im.vector.app.android); the production Sygnal routes both app IDs as a belt-and-braces measure. (c) UnifiedPush is now an fdroidImplementation-only dependency: 2026.10.1 had persisted UnifiedPush as the current provider with no distributor installed, and the registration flow never falls through to Firebase once a provider is stored, so gplay installs could dead-end with no pusher at all. The self-updater also stamps its last-check time only after a completed scan and the interval drops from 6h to 1h (2026.10.2's offer was eaten by the old stamp-on-attempt 6h gate). Release checks: APK strings must show our sender ID and must NOT contain 912726360885; gplay dex must contain the firebase provider and no unifiedpush classes.
 
+10. Firebase retired, all flavors (2026-10-15) \u2014 Riley's order (2026-10-14) after the UnifiedPush pilot proved out: Google gets nothing, not even content-free FCM traffic. The gplay flavor now wires libraries:pushproviders:unifiedpush exactly like fdroid (app/build.gradle.kts), the MapLibre GMS location runtime is dropped for fdroid parity, and the google() repository filter in settings.gradle.kts no longer admits com.google.firebase artifacts. Items 8\u20139 are historical: the firebase module remains in tree but is referenced by no flavor, and the server side (Sygnal + the FCM pusher rows) is retired. Release check: the gplay APK's dex/manifest must scan at the fdroid baseline — no Firebase implementation classes, no FirebaseMessagingService.
+
+11. Redesign foundation: Black Candle theme overrides (2026-10-15) \u2014 the ground-up redesign's first increment. libraries/designsystem gains TesseractTheme.kt: SemanticColors.tesseractDark()/tesseractLight() copy() overrides carrying the Black Candle ID v2 token set (near-black warm surfaces, candle-amber action/accent #E9A33D, the ink ramp; light mode deepens the amber for contrast), applied at the single composition point in ElementThemeApp so every activity (main, calls, lockscreen) inherits them. Generated Compound token files are untouched (item 7's amber re-point remains as the non-composed fallback). Design source of truth: the Figma file "Tesseract - Ground-Up Redesign".
+
 ## Build (release APK, sideload)
 
 Toolchain: JDK 21, Android SDK platform 37 + build-tools 37.0.0 (see the tesseract-android-build Docker image used by Black Candle).
 
     ./gradlew :app:assembleFdroidRelease
 
-    ./gradlew :app:assembleGplayRelease   # push-capable (Firebase) build; needs app/google-services.json
+    ./gradlew :app:assembleGplayRelease   # UnifiedPush build, same as fdroid since the Firebase retirement (item 10)
 
 produces an unsigned universal APK under app/build/outputs/apk/fdroid/release/. Sign with the Tesseract release keystore (held offline by the founders; generated 2026-10-12):
 
