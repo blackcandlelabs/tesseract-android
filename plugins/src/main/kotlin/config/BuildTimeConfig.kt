@@ -29,7 +29,8 @@ object BuildTimeConfig {
     val SERVICES_SENTRY_DSN_RUST: String? = null
     val BUG_REPORT_URL: String? = null
     val BUG_REPORT_APP_NAME: String? = null
-    const val PUSH_CONFIG_INCLUDE_FIREBASE: Boolean = true
+    // Tesseract fork: Firebase retired 2026-10-14 - UnifiedPush is the only push provider.
+    const val PUSH_CONFIG_INCLUDE_FIREBASE: Boolean = false
     const val PUSH_CONFIG_INCLUDE_UNIFIED_PUSH: Boolean = true
     val PUSHER_APP_ID_RELEASE: String? = "com.blackcandle.tesseract"
     val PUSHER_APP_ID_DEBUG: String? = "com.blackcandle.tesseract"

@@ -285,11 +285,13 @@ dependencies {
     implementation(projects.services.analytics.compose)
 
     if (ModulesConfig.pushProvidersConfig.includeFirebase) {
-        // Tesseract fork: Firebase retired (2026-10-14) - gplay uses UnifiedPush, same as fdroid.
-        "gplayImplementation"(projects.libraries.pushproviders.unifiedpush)
+        "gplayImplementation"(projects.libraries.pushproviders.firebase)
     }
     if (ModulesConfig.pushProvidersConfig.includeUnifiedPush) {
-    "fdroidImplementation"(projects.libraries.pushproviders.unifiedpush)
+        // Tesseract fork: UnifiedPush is the only push path on every flavor
+        // since the Firebase retirement (2026-10-14).
+        "gplayImplementation"(projects.libraries.pushproviders.unifiedpush)
+        "fdroidImplementation"(projects.libraries.pushproviders.unifiedpush)
     }
 
     // Google Play Services fused location backend. Discovered at runtime via ServiceLoader by the
